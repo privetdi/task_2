@@ -86,26 +86,18 @@ const App: FC = () => {
     };
     //массив рецензия
     const fetchReviews = async () => {
-      try {
-        const data = await getReviews();
-        const newReviewsMap = new Map<
-          string,
-          { userId: string; text: string }
-        >();
-        data.forEach((item) => {
-          const { userId, id, text } = item;
-          newReviewsMap.set(id, { userId, text });
-        });
-        setReviewsMap(newReviewsMap);
-      } catch (error) {
-        console.error(error);
-      }
+      const data = await getReviews();
+      const newReviewsMap = new Map<string, { userId: string; text: string }>();
+      data.forEach((item) => {
+        const { userId, id, text } = item;
+        newReviewsMap.set(id, { userId, text });
+      });
+      setReviewsMap(newReviewsMap);
     };
 
     fetchReviews();
     fetchUserMap();
     fetchBooks();
-    console.log(reviews);
   }, []);
 
   return (
