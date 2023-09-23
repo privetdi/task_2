@@ -27,26 +27,22 @@ const toBookInformation = (
   reviewsMap: Map<string, { userId: string; text: string }>
 ): BookInformation => {
   const authorName = userMap.get(book.authorId) || "Unknown Author";
-  book.reviewIds.map((item) => {
-    console.log(reviewsMap.has(item));
-  });
+  let testUser = {
+    id: "test",
+    text: "test text",
+    user: { id: "sdf", name: "Reviewer" },
+  };
   return {
     id: book.id,
     name: book.name || "Книга без названия",
     author: { name: authorName, id: book.authorId },
     reviews: [
       ...book.reviewIds.map((item) => {
-        let testUser = {
-          id: "test",
-          text: "test text",
-          user: { id: "sdf", name: "Reviewer" },
-        };
         let userId = reviewsMap.get(item)?.userId;
         let userReview =
           reviewsMap.get(item) && userId
             ? { id: userId, name: userMap.get(userId) || "" }
             : testUser.user;
-
         return reviewsMap.has(item)
           ? {
               id: item,
