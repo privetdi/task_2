@@ -93,7 +93,7 @@ const App: FC = () => {
       });
       setUserMap(newUserMap);
     };
-    //массив рицезий
+    //массив рецензия
     const fetchReviews = async () => {
       try {
         const data = await getReviews();
