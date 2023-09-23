@@ -36,22 +36,17 @@ const toBookInformation = (
     id: book.id,
     name: book.name || "Книга без названия",
     author: { name: authorName, id: book.authorId },
-    reviews: [
-      ...book.reviewIds.map((item) => {
-        let userId = reviewsMap.get(item)?.userId;
-        let userReview =
-          reviewsMap.get(item) && userId
-            ? { id: userId, name: userMap.get(userId) || "" }
-            : testUser.user;
-        return reviewsMap.has(item)
-          ? {
-              id: item,
-              user: userReview,
-              text: reviewsMap.get(item)?.text || "",
-            }
-          : testUser;
-      }),
-    ],
+    reviews: book.reviewIds.map((item) => {
+      const review = reviewsMap.get(item);
+      const userId = review?.userId || "";
+      const userName = userMap.get(userId) || "";
+      const user = userId ? { id: userId, name: userName } : testUser.user;
+      return {
+        id: item,
+        user: user,
+        text: review?.text || "",
+      };
+    }),
     description: book.description,
   };
 };
