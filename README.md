@@ -1,2 +1,1 @@
-# task_2
-Created with CodeSandbox
+list book, live demo https://privetdi.github.io/task_2
